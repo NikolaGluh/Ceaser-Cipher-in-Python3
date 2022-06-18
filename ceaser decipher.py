@@ -35,6 +35,7 @@ def encrypt(text,s):
 			result += chr((ord(char) + s - 97) % 26 + 97)
 
 	return result
+	result = ""
 
 def decrypt(text, s):
 	result = ""
@@ -51,6 +52,7 @@ def decrypt(text, s):
 			result += chr((ord(char) - s - 97) % 26 + 97)
 
 	return result
+	result = ""
 
 #check the above function
 main()
