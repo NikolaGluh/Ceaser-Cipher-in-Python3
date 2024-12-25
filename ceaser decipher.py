@@ -1,58 +1,47 @@
-#A python program to illustrate Caesar Cipher Technique, modified by nik
-#Original: https://www.geeksforgeeks.org/caesar-cipher-in-cryptography/
+#A python program for Caesar Cipher
+
+# Main function for user input and printing results
 def main():
-    text = input("Enter your text: ")
-    choice = input("Do you want to encrypt or decrypt text? (ecrypt/decrypt): ")
-    if choice.lower() == "encrypt":
-        s = input("How many shifts would you like? ")
-        print("Text : " + text)
-        print("Shift : " + str(s))
-        print("Cipher: " + encrypt(text,int(s)))
-        input('\n Press any key to exit')
-    elif choice.lower() == "decrypt":
-        print("Cipher : " + text)
-        print("Results: \n")
-        for i in range(26):
-            print(decrypt(text, i))
-        input('\nPress any key to exit')
-    else:
-        input("Please enter a valid value.\n")
-        main()
+    while True:
+        text = input("Enter your text: ")
+        choice = input("Do you want to encrypt or decrypt text? (encrypt/decrypt): ").strip().lower()
 
-def encrypt(text,s):
-	result = ""
+        if choice == "encrypt" or choice == "e":
+            try:
+                s = int(input("How many shifts would you like? "))
+            except ValueError:
+                print("Please enter a valid number for shifts.")
+                continue
+            
+            print(f"\nText: {text}\nShift: {s}\nCipher: {cipher(text, s, direction=1)}")
+        elif choice == "decrypt" or choice == "d":
+            print("\nCipher: " + text)
+            print("Results:")
+            for i in range(26):
+                print(f"Shift {i}: {cipher(text, i, direction=-1)}")
 
-	# traverse text
-	for i in range(len(text)):
-		char = text[i]
+        else:
+            print("Please enter 'encrypt' or 'decrypt'.")
+            continue
 
-		# Encrypt uppercase characters
-		if (char.isupper()):
-			result += chr((ord(char) + s-65) % 26 + 65)
+        input('\nPress any key to exit.')
+        break
 
-		# Encrypt lowercase characters
-		else:
-			result += chr((ord(char) + s - 97) % 26 + 97)
+# Function for shifting letters backwards or forwards
+def cipher(text, s, direction=1):
+    result = ""
 
-	return result
-	result = ""
+    for char in text:
+        if char.isupper():
+            # 65 is ASCII decimal for uppercase 'A'
+            result += chr((ord(char) - 65 + direction * s) % 26 + 65)
+        elif char.islower():
+            # 97 is ASCII decimal for lowercase 'a'
+            result += chr((ord(char) - 97 + direction * s) % 26 + 97)
+        else: # Keep the character if it's a special character (like Space)
+            result += char
 
-def decrypt(text, s):
-	result = ""
-	# traverse text
-	for i in range(len(text)):
-		char = text[i]
+    return result
 
-		# Encrypt uppercase characters
-		if (char.isupper()):
-			result += chr((ord(char) - s-65) % 26 + 65)
-
-		# Encrypt lowercase characters
-		else:
-			result += chr((ord(char) - s - 97) % 26 + 97)
-
-	return result
-	result = ""
-
-#check the above function
+# Calling main function once
 main()
