@@ -13,7 +13,9 @@ def main():
                 print("Please enter a valid number for shifts.")
                 continue
             
-            print(f"\nText: {text}\nShift: {s}\nCipher: {cipher(text, s, direction=1)}")
+            print(f"\nText: {text}
+                    \nShift: {s}
+                    \nCipher: {cipher(text, s, direction=1)}")
         elif choice == "decrypt" or choice == "d":
             print("\nCipher: " + text)
             print("Results:")
