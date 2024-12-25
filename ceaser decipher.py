@@ -47,3 +47,7 @@ def cipher(text, s, direction=1):
 
 # Calling main function once
 main()
+
+# Examples:
+# For letter A going forwards by 1 shift: chr((65 - 65 + direction * s) % 26 + 65) | (65 - 65 + 1 * 1) % 26 + 65 | char(66) | "B"
+# For letter a going backwards by 1 shift: chr((97 - 97 + direction * s) % 26 + 97) | (97 - 97 + -1 * 1) % 26 + 97 | char(122) | "z"
